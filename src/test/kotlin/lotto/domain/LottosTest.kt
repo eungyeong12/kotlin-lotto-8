@@ -61,6 +61,6 @@ class LottosTest {
         val rate = lottos.getRateOfReturn(results, amount)
 
         // then
-        assertEquals(rate, 5.0.toBigDecimal())
+        assertEquals(rate, 500.0.toBigDecimal())
     }
 }
