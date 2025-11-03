@@ -31,7 +31,7 @@ class AmountTest {
         val exception = assertThrows<IllegalArgumentException> { Amount.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.AMOUNT_BLANK.toString())
+        assertEquals(exception.message, ErrorMessage.INPUT_BLANK.toString())
     }
 
     @Test
@@ -43,7 +43,7 @@ class AmountTest {
         val exception = assertThrows<IllegalArgumentException> { Amount.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.AMOUNT_NOT_INTEGER.toString())
+        assertEquals(exception.message, ErrorMessage.INPUT_NOT_INTEGER.toString())
     }
 
     @Test
