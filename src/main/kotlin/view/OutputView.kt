@@ -36,7 +36,7 @@ object OutputView {
         println("\n$BONUS_NUMBER_PROMPT")
     }
 
-    fun displayLottoResult(winningResults: Map<Rank, Int>, rateOfReturn: BigDecimal) {
+    fun displayLottoResult(winningResults: Map<Rank, Int>, rateOfReturn: Double) {
         println("\n$WINNING_STATISTICS\n$DIVIDER")
         printLottoWinningResults(winningResults)
         printLottoRateOfReturn(rateOfReturn)
@@ -68,7 +68,7 @@ object OutputView {
         }
     }
 
-    private fun printLottoRateOfReturn(rateOfReturn: BigDecimal) {
+    private fun printLottoRateOfReturn(rateOfReturn: Double) {
         println(String.format(RATE_OF_RETURN_MESSAGE, rateOfReturn))
     }
 }

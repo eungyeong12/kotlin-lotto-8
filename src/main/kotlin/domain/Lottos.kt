@@ -16,12 +16,13 @@ class Lottos private constructor(private val lottos: List<Lotto>) {
         return results.toMap()
     }
 
-    fun getRateOfReturn(results: Map<Rank, Int>, amount: Amount): BigDecimal {
+    fun getRateOfReturn(results: Map<Rank, Int>, amount: Amount): Double {
         val totalPrize = results.entries
             .sumOf { (rank, count) ->  rank.calculatePrize(count) }
 
         return totalPrize.multiply(BigDecimal.valueOf(100))
             .divide(amount.value.toBigDecimal(), SCALE, RoundingMode.HALF_UP)
+            .toDouble()
     }
 
     fun toDto(): LottosDto =
