@@ -7,6 +7,7 @@ object OutputView {
     private const val PURCHASE_AMOUNT_PROMPT = "구입금액을 입력해 주세요."
     private const val LOTTO_COUNT_MESSAGE_SUFFIX = "개를 구매했습니다."
     private const val WINNING_NUMBERS_PROMPT = "당첨 번호를 입력해 주세요."
+    private const val BONUS_NUMBER_PROMPT = "보너스 번호를 입력해 주세요."
 
     fun displayPurchaseAmountPrompt() {
         println(PURCHASE_AMOUNT_PROMPT)
@@ -19,6 +20,10 @@ object OutputView {
 
     fun displayWinningNumbersPrompt() {
         println(WINNING_NUMBERS_PROMPT)
+    }
+
+    fun displayBonusNumberPrompt() {
+        println(BONUS_NUMBER_PROMPT)
     }
 
     private fun printLottoCount(count: Int) {

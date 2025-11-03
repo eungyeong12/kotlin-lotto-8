@@ -1,6 +1,7 @@
 package controller
 
 import domain.Amount
+import domain.BonusNumber
 import domain.Lottos
 import domain.RandomLottoNumberGenerator
 import domain.WinningNumbers
@@ -14,6 +15,7 @@ class LottoController {
         OutputView.displayLottoCountAndNumbers(lottos.toDto())
 
         val winningNumbers = getWinningNumbers()
+        val bonusNumber = getBonusNumber(winningNumbers)
     }
 }
 
@@ -42,3 +44,15 @@ private fun getWinningNumbers(): WinningNumbers {
         }
     }
 }
+
+private fun getBonusNumber(winningNumbers: WinningNumbers): BonusNumber {
+    while (true) {
+        try {
+            OutputView.displayBonusNumberPrompt()
+            return BonusNumber.from(InputView.readInput(), winningNumbers)
+        } catch (e: IllegalArgumentException) {
+            println(e.message.toString())
+        }
+    }
+}
+
