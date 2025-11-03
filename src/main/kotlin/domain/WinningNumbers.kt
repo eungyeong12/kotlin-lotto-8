@@ -20,7 +20,7 @@ value class WinningNumbers private constructor(val value: List<Int>){
             val numbers = Parser.splitByComma(input)
                 .map { Parser.parseToNumber(it) }
             validate(numbers)
-            return WinningNumbers(numbers.toList())
+            return WinningNumbers(numbers)
         }
 
         private fun validate(numbers: List<Int>) {
