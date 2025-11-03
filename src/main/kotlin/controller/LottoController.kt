@@ -30,7 +30,6 @@ private fun getAmountAndGenerateLottos(): Pair<Amount, Lottos> =
 private fun generateLottos(amount: Amount): Lottos =
     Lottos.generate(amount, RandomLottoNumberGenerator())
 
-
 private fun getWinningNumbers(): WinningNumbers =
     executeWithRetry(
         { OutputView.displayWinningNumbersPrompt() }
