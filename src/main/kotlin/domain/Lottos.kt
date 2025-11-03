@@ -18,7 +18,7 @@ class Lottos private constructor(private val lottos: List<Lotto>) {
 
     fun getRateOfReturn(results: Map<Rank, Int>, amount: Amount): BigDecimal {
         val totalPrize = results.entries
-            .sumOf { (rank, count) ->  rank.culculatePrize(count) }
+            .sumOf { (rank, count) ->  rank.calculatePrize(count) }
 
         return totalPrize.multiply(BigDecimal.valueOf(100))
             .divide(amount.value.toBigDecimal(), SCALE, RoundingMode.HALF_UP)

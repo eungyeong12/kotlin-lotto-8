@@ -8,9 +8,9 @@ enum class Rank(val matchCount: Int = 0, val isBonusNumberMatch: Boolean = false
     FIVE_MATCH(matchCount = 5, isBonusNumberMatch = false, prize = 1_500_000),
     FIVE_MATCH_AND_BONUS_MATCH(matchCount = 5, isBonusNumberMatch = true, prize = 30_000_000),
     SIX_MATCH(matchCount = 6, prize = 2_000_000_000),
-    ELSE;
+    NONE;
 
-    fun culculatePrize(count: Int): BigDecimal {
+    fun calculatePrize(count: Int): BigDecimal {
         return prize.toBigDecimal().multiply(count.toBigDecimal())
     }
 
@@ -19,9 +19,9 @@ enum class Rank(val matchCount: Int = 0, val isBonusNumberMatch: Boolean = false
             if (matchCount == 5) {
                 return entries.firstOrNull {
                     it.matchCount == matchCount && it.isBonusNumberMatch == isBonusNumberMatch
-                } ?: ELSE
+                } ?: NONE
             }
-            return entries.firstOrNull() { it.matchCount == matchCount } ?: ELSE
+            return entries.firstOrNull { it.matchCount == matchCount } ?: NONE
         }
     }
 }

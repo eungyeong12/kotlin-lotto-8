@@ -34,7 +34,7 @@ class RankTest {
         actual: BigDecimal
     ) {
         // when
-        val prize = rank.culculatePrize(count)
+        val prize = rank.calculatePrize(count)
 
         // then
         assertEquals(prize, actual)
