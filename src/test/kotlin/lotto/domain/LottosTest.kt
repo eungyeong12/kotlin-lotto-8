@@ -9,7 +9,7 @@ class FixedLottoNumberGenerator(private val numbers: List<Int>): LottoNumberGene
     override fun generate() = numbers
 }
 
-@DisplayName("로또 발행 테스트")
+@DisplayName("로또 발행 및 결과 반환 테스트")
 class LottosTest {
 
     @Test
@@ -29,7 +29,7 @@ class LottosTest {
     }
 
     @Test
-    fun `당첨 번호 일치 개수와 보너스 일치 여부에 대해 올바른 결과를 반환한다`() {
+    fun `당첨 번호 일치 개수와 보너스 일치 여부에 대해 올바른 당첨 내역을 반환한다`() {
         // given
         val lottos = Lottos.generate(
             Amount.from("2000"),
@@ -43,5 +43,24 @@ class LottosTest {
 
         // then
         assertEquals(results[Rank.THREE_MATCH], 2)
+    }
+
+    @Test
+    fun `당첨 내역과 구입 금액에 대해 올바른 수익률을 반환한다`() {
+        // given
+        val amount = Amount.from("2000")
+        val lottos = Lottos.generate(
+            amount,
+            FixedLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6))
+        )
+        val winningNumbers = WinningNumbers.from("1, 2, 3, 7, 8, 9")
+        val bonusNumber = BonusNumber.from("10", winningNumbers)
+        val results = lottos.getWinningResults(winningNumbers, bonusNumber)
+
+        // when
+        val rate = lottos.getRateOfReturn(results, amount)
+
+        // then
+        assertEquals(rate, 5.0.toBigDecimal())
     }
 }

@@ -6,21 +6,24 @@ import view.OutputView
 
 class LottoController {
     fun run() {
-        val amount = getPurchaseAmount()
-        val lottos = generateLottos(amount)
+        val (amount, lottos) = getAmountAndGenerateLottos()
         OutputView.displayLottoCountAndNumbers(lottos.toDto())
 
         val winningNumbers = getWinningNumbers()
         val bonusNumber = getBonusNumber(winningNumbers)
+
         val winningResults = lottos.getWinningResults(winningNumbers, bonusNumber)
+        val rateOfReturn = lottos.getRateOfReturn(winningResults, amount)
     }
 }
 
-private fun getPurchaseAmount(): Amount {
+private fun getAmountAndGenerateLottos(): Pair<Amount, Lottos> {
     while (true) {
         try {
             OutputView.displayPurchaseAmountPrompt()
-            return Amount.from(InputView.readInput())
+            val amount = Amount.from(InputView.readInput())
+            val lottos = generateLottos(amount)
+            return Pair(amount, lottos)
         } catch (e: IllegalArgumentException) {
             println(e.message.toString())
         }
