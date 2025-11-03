@@ -45,9 +45,6 @@ private fun getBonusNumber(winningNumbers: WinningNumbers): BonusNumber =
         BonusNumber.from(InputView.readInput(), winningNumbers)
     }
 
-
-
-
 private fun <T> executeWithRetry(prompt: () -> Unit, block: () -> T): T {
     while (true) {
         try {
