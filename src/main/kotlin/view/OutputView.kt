@@ -42,6 +42,10 @@ object OutputView {
         printLottoRateOfReturn(rateOfReturn)
     }
 
+    fun displayErrorMessage(message: String) {
+        println(message)
+    }
+
     private fun printLottoCount(count: Int) {
         println("\n${count}$LOTTO_COUNT_MESSAGE_SUFFIX")
     }
@@ -65,7 +69,7 @@ object OutputView {
     }
 
     private fun printLottoRateOfReturn(rateOfReturn: BigDecimal) {
-        println(String.format(RATE_OF_RETURN_MESSAGE, rateOfReturn.toDouble()))
+        println(String.format(RATE_OF_RETURN_MESSAGE, rateOfReturn))
     }
 }
 

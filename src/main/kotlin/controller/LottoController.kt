@@ -51,7 +51,7 @@ private fun <T> executeWithRetry(prompt: () -> Unit, block: () -> T): T {
             prompt()
             return block()
         } catch (e: IllegalArgumentException) {
-            println(e.message)
+            OutputView.displayErrorMessage(e.message.toString())
         }
     }
 }
