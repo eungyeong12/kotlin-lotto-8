@@ -1,9 +1,16 @@
 package lotto
 
+import domain.dto.LottoDto
+import exception.ErrorMessage
+
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
+        require(numbers.size == LOTTO_NUMBER_COUNT) { ErrorMessage.LOTTO_NUMBER_COUNT_INVALID }
     }
 
-    // TODO: 추가 기능 구현
+    fun toDto(): LottoDto = LottoDto(numbers.sorted())
+
+    companion object {
+        private const val LOTTO_NUMBER_COUNT = 6
+    }
 }
