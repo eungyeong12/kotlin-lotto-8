@@ -1,10 +1,6 @@
 package controller
 
-import domain.Amount
-import domain.BonusNumber
-import domain.Lottos
-import domain.RandomLottoNumberGenerator
-import domain.WinningNumbers
+import domain.*
 import view.InputView
 import view.OutputView
 
@@ -16,6 +12,7 @@ class LottoController {
 
         val winningNumbers = getWinningNumbers()
         val bonusNumber = getBonusNumber(winningNumbers)
+        val winningResults = lottos.getWinningResults(winningNumbers, bonusNumber)
     }
 }
 

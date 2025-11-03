@@ -75,4 +75,32 @@ class BonusNumberTest {
         // then
         assertEquals(exception.message, ErrorMessage.LOTTO_NUMBERS_DUPLICATE.toString())
     }
+
+    @Test
+    fun `보너스 숫자가 로또 번호와 일치한다면 true를 반환한다`() {
+        // given
+        val winningNumbers = WinningNumbers.from("1, 2, 3, 4, 5, 6")
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 7)
+        val bonus = BonusNumber.from("7", winningNumbers)
+
+        // when
+        val isBonusNumberMatch = bonus.isBonusNumberMatch(lottoNumbers)
+
+        // then
+        assertEquals(isBonusNumberMatch, true)
+    }
+
+    @Test
+    fun `보너스 숫자가 로또 번호와 일치하지 않는다면 false를 반환한다`() {
+        // given
+        val winningNumbers = WinningNumbers.from("1, 2, 3, 4, 5, 6")
+        val lottoNumbers = listOf(1, 2, 3, 4, 5, 6)
+        val bonus = BonusNumber.from("7", winningNumbers)
+
+        // when
+        val isBonusNumberMatch = bonus.isBonusNumberMatch(lottoNumbers)
+
+        // then
+        assertEquals(isBonusNumberMatch, false)
+    }
 }

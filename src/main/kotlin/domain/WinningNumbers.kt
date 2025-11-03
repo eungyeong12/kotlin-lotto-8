@@ -10,6 +10,10 @@ import util.Validator
 @JvmInline
 value class WinningNumbers private constructor(val value: List<Int>){
 
+    fun getMatchCount(numbers: List<Int>): Int {
+        return value.count { it in numbers }
+    }
+
     companion object {
         fun from(input: String): WinningNumbers {
             Validator.validateNotBlank(input)

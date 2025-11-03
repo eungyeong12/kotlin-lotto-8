@@ -6,6 +6,14 @@ import lotto.Lotto
 
 class Lottos private constructor(private val lottos: List<Lotto>) {
 
+    fun getWinningResults(winningNumbers: WinningNumbers, bonusNumber: BonusNumber): Map<Rank, Int> {
+        val results = lottos
+            .map { it.getRank(winningNumbers, bonusNumber) }
+            .groupingBy { it }
+            .eachCount()
+        return results.toMap()
+    }
+
     fun toDto(): LottosDto =
         LottosDto(lottos.size, lottos.map { it.toDto() })
 

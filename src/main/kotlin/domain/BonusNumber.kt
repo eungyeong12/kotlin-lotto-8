@@ -9,6 +9,10 @@ import util.Validator
 @JvmInline
 value class BonusNumber private constructor(val value: Int) {
 
+    fun isBonusNumberMatch(numbers: List<Int>): Boolean {
+        return value in numbers
+    }
+
     companion object {
         fun from(input: String, winningNumbers: WinningNumbers): BonusNumber {
             Validator.validateNotBlank(input)

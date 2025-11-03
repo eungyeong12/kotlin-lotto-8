@@ -81,4 +81,17 @@ class WinningNumbersTest {
         // then
         assertEquals(exception.message, ErrorMessage.LOTTO_NUMBERS_DUPLICATE.toString())
     }
+
+    @Test
+    fun `사용자가 구매한 로또 번호와 당첨 번호를 비교하여 올바르게 일치 개수를 반환한다`() {
+        // given
+        val winningNumbers = WinningNumbers.from("1, 2, 3, 4, 5, 6")
+        val lottoNumbers = listOf(1, 2, 3, 8, 9, 10)
+
+        // when
+        val matchCount = winningNumbers.getMatchCount(lottoNumbers)
+
+        // then
+        assertEquals(matchCount, 3)
+    }
 }

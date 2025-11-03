@@ -1,8 +1,6 @@
 package lotto.domain
 
-import domain.Amount
-import domain.LottoNumberGenerator
-import domain.Lottos
+import domain.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -28,5 +26,22 @@ class LottosTest {
         // then
         assertEquals(lottos.count, 10)
         assertEquals(lottos.lottos[0].numbers, listOf(1, 2, 3, 4, 5, 6))
+    }
+
+    @Test
+    fun `당첨 번호 일치 개수와 보너스 일치 여부에 대해 올바른 결과를 반환한다`() {
+        // given
+        val lottos = Lottos.generate(
+            Amount.from("2000"),
+            FixedLottoNumberGenerator(listOf(1, 2, 3, 4, 5, 6))
+        )
+        val winningNumbers = WinningNumbers.from("1, 2, 3, 7, 8, 9")
+        val bonusNumber = BonusNumber.from("10", winningNumbers)
+
+        // when
+        val results = lottos.getWinningResults(winningNumbers, bonusNumber)
+
+        // then
+        assertEquals(results[Rank.THREE_MATCH], 2)
     }
 }
