@@ -1,19 +1,24 @@
 package domain
 
+import constant.Constants.AMOUNT_UNIT
 import exception.ErrorMessage
+import util.Parser
+import util.Validator
 
 @JvmInline
 value class Amount private constructor(val value: Int) {
 
     companion object {
-        private const val AMOUNT_UNIT = 1000
-
         fun from(input: String): Amount {
-            require(input.isNotBlank()) { ErrorMessage.INPUT_BLANK }
-            val n = requireNotNull(input.toIntOrNull()) { ErrorMessage.INPUT_NOT_INTEGER }
+            Validator.validateNotBlank(input)
+            val n = Parser.parseToNumber(input)
+            validate(n)
+            return Amount(n)
+        }
+
+        private fun validate(n: Int) {
             require(n >= AMOUNT_UNIT) { ErrorMessage.AMOUNT_BELOW_MINIMUM }
             require(n % AMOUNT_UNIT == 0) { ErrorMessage.AMOUNT_NOT_THOUSAND_UNIT }
-            return Amount(n)
         }
     }
 }
