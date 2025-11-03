@@ -26,3 +26,47 @@
 - 각 Rank별 일치 개수를 구한다.
 #### 7. 수익률을 계산한다.
 #### 8. 당첨 내역과 수익률을 출력한다.
+
+## 📁 프로젝트 구조
+```declarative
+src
+├─ main
+│  └─ kotlin
+│     ├─ constant
+│     │  └─ Constants.kt
+│     ├─ controller
+│     │  └─ LottoController.kt
+│     ├─ domain
+│     │  ├─ dto
+│     │  │  ├─ LottoDto.kt
+│     │  │  └─ LottosDto.kt
+│     │  ├─ Amount.kt
+│     │  ├─ BonusNumber.kt
+│     │  ├─ LottoNumberGenerator.kt
+│     │  ├─ Lottos.kt
+│     │  ├─ RandomLottoNumberGenerator.kt
+│     │  ├─ Rank.kt
+│     │  └─ WinningNumbers.kt
+│     ├─ exception
+│     │  └─ ErrorMessage.kt
+│     ├─ lotto
+│     │  ├─ Application.kt
+│     │  └─ Lotto.kt
+│     ├─ util
+│     │  ├─ Parser.kt
+│     │  └─ Validator.kt
+│     └─ view
+│        ├─ InputView.kt
+│        └─ OutputView.kt
+└─ test
+      └─ kotlin
+         └─ lotto
+            ├─ domain
+            │  ├─ AmountTest.kt
+            │  ├─ BonusNumberTest.kt
+            │  ├─ LottosTest.kt
+            │  ├─ RankTest.kt
+            │  └─ WinningNumbersTest.kt
+            ├─ ApplicationTest.kt
+            └─ LottoTest.kt
+```
