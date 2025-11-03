@@ -3,7 +3,6 @@ package view
 import domain.Rank
 import domain.dto.LottoDto
 import domain.dto.LottosDto
-import java.math.BigDecimal
 
 object OutputView {
     private const val PURCHASE_AMOUNT_PROMPT = "구입금액을 입력해 주세요."
