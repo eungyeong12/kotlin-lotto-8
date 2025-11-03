@@ -20,7 +20,8 @@ class Lottos private constructor(private val lottos: List<Lotto>) {
         val totalPrize = results.entries
             .sumOf { (rank, count) ->  rank.culculatePrize(count) }
 
-        return totalPrize.divide(amount.value.toBigDecimal(), SCALE, RoundingMode.HALF_UP)
+        return totalPrize.multiply(BigDecimal.valueOf(100))
+            .divide(amount.value.toBigDecimal(), SCALE, RoundingMode.HALF_UP)
     }
 
     fun toDto(): LottosDto =
