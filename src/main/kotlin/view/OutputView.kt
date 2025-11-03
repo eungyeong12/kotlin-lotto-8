@@ -17,8 +17,7 @@ object OutputView {
     private const val FIVE_MATCH_RESULT = "5개 일치 (1,500,000원) - %d개"
     private const val FIVE_MATCH_AND_BONUS_MATCH_RESULT = "5개 일치, 보너스 볼 일치 (30,000,000원) - %d개"
     private const val SIX_MATCH_RESULT = "6개 일치 (2,000,000,000원) - %d개"
-    private const val RATE_OF_RETURN_MESSAGE_PREFIX = "총 수익률은"
-    private const val RATE_OF_RETURN_MESSAGE_SUFFIX = "%입니다."
+    private const val RATE_OF_RETURN_MESSAGE = "총 수익률은 %,.1f%%입니다."
 
     fun displayPurchaseAmountPrompt() {
         println(PURCHASE_AMOUNT_PROMPT)
@@ -70,7 +69,7 @@ object OutputView {
     }
 
     private fun printLottoRateOfReturn(rateOfReturn: BigDecimal) {
-        println("$RATE_OF_RETURN_MESSAGE_PREFIX $rateOfReturn$RATE_OF_RETURN_MESSAGE_SUFFIX")
+        println(String.format(RATE_OF_RETURN_MESSAGE, rateOfReturn))
     }
 }
 
