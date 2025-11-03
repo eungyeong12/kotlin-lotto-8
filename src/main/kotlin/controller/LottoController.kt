@@ -14,6 +14,7 @@ class LottoController {
 
         val winningResults = lottos.getWinningResults(winningNumbers, bonusNumber)
         val rateOfReturn = lottos.getRateOfReturn(winningResults, amount)
+        OutputView.displayLottoResult(winningResults, rateOfReturn)
     }
 }
 
