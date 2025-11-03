@@ -18,42 +18,41 @@ class LottoController {
     }
 }
 
-private fun getAmountAndGenerateLottos(): Pair<Amount, Lottos> {
+private fun getAmountAndGenerateLottos(): Pair<Amount, Lottos> =
+    executeWithRetry(
+        { OutputView.displayPurchaseAmountPrompt() }
+    ) {
+        val amount = Amount.from(InputView.readInput())
+        val lottos = generateLottos(amount)
+        Pair(amount, lottos)
+    }
+
+private fun generateLottos(amount: Amount): Lottos =
+    Lottos.generate(amount, RandomLottoNumberGenerator())
+
+
+private fun getWinningNumbers(): WinningNumbers =
+    executeWithRetry(
+        { OutputView.displayWinningNumbersPrompt() }
+    ) {
+        WinningNumbers.from(InputView.readInput())
+    }
+
+private fun getBonusNumber(winningNumbers: WinningNumbers): BonusNumber =
+    executeWithRetry(
+        { OutputView.displayBonusNumberPrompt() }
+    ) {
+        BonusNumber.from(InputView.readInput(), winningNumbers)
+    }
+
+
+private fun <T> executeWithRetry(prompt: () -> Unit, block: () -> T): T {
     while (true) {
         try {
-            OutputView.displayPurchaseAmountPrompt()
-            val amount = Amount.from(InputView.readInput())
-            val lottos = generateLottos(amount)
-            return Pair(amount, lottos)
+            prompt()
+            return block()
         } catch (e: IllegalArgumentException) {
-            println(e.message.toString())
+            println(e.message)
         }
     }
 }
-
-private fun generateLottos(amount: Amount): Lottos {
-    return Lottos.generate(amount, RandomLottoNumberGenerator())
-}
-
-private fun getWinningNumbers(): WinningNumbers {
-    while (true) {
-        try {
-            OutputView.displayWinningNumbersPrompt()
-            return WinningNumbers.from(InputView.readInput())
-        } catch (e: IllegalArgumentException) {
-            println(e.message.toString())
-        }
-    }
-}
-
-private fun getBonusNumber(winningNumbers: WinningNumbers): BonusNumber {
-    while (true) {
-        try {
-            OutputView.displayBonusNumberPrompt()
-            return BonusNumber.from(InputView.readInput(), winningNumbers)
-        } catch (e: IllegalArgumentException) {
-            println(e.message.toString())
-        }
-    }
-}
-
