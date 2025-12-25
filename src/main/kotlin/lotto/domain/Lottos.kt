@@ -1,10 +1,15 @@
 package lotto.domain
 
 import lotto.constant.Constants.AMOUNT_UNIT
+import lotto.domain.dto.PurchasedLotto
 
 class Lottos private constructor(
     val lottos: List<Lotto>
 ) {
+    fun getPurchasedLotto() = PurchasedLotto(
+        lottos.size,
+        lottos.map { it.toDto() }
+    )
 
     companion object {
         fun from(amount: Amount, numbersProvider: NumbersProvider): Lottos {

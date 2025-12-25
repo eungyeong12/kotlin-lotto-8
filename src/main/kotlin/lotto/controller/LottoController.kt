@@ -11,6 +11,7 @@ class LottoController {
     fun run() {
         val amount = getAmount()
         val lottos = Lottos.from(amount, RandomNumbersProvider())
+        OutputView.displayPurchasedLotto(lottos.getPurchasedLotto())
     }
 
     private fun getAmount(): Amount =
