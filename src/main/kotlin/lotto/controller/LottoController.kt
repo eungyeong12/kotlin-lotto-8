@@ -1,6 +1,8 @@
 package lotto.controller
 
 import lotto.domain.Amount
+import lotto.domain.Lottos
+import lotto.domain.RandomNumbersProvider
 import lotto.view.InputView
 import lotto.view.OutputView
 
@@ -8,6 +10,7 @@ class LottoController {
 
     fun run() {
         val amount = getAmount()
+        val lottos = Lottos.from(amount, RandomNumbersProvider())
     }
 
     private fun getAmount(): Amount =
