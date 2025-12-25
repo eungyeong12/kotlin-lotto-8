@@ -1,5 +1,6 @@
 package lotto.domain
 
+import com.sun.jdi.Value
 import lotto.constant.Constants.LOTTO_COUNT
 import lotto.constant.Constants.LOTTO_MAX_NUMBER
 import lotto.constant.Constants.LOTTO_MIN_NUMBER
@@ -8,16 +9,19 @@ import lotto.parser.Parser.parseToNumber
 import lotto.parser.Parser.splitByDelimiter
 import lotto.validator.Validator.validateNotBlank
 
-class WinningNumber private constructor(
-    val numbers: List<Int>
+@JvmInline
+value class WinningNumber private constructor(
+    val value: List<Int>
 ) {
     init {
-        require(numbers.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) {
+        require(value.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) {
             ErrorMessage.WRONG_RANGE_WINNING_NUMBER
         }
-        require(numbers.size == LOTTO_COUNT) { ErrorMessage.WINNING_NUMBER_NOT_SIX }
-        require(numbers.size == numbers.distinct().size) { ErrorMessage.DUPLICATE_WINNING_NUMBER }
+        require(value.size == LOTTO_COUNT) { ErrorMessage.WINNING_NUMBER_NOT_SIX }
+        require(value.size == value.distinct().size) { ErrorMessage.DUPLICATE_WINNING_NUMBER }
     }
+
+    fun contains(number: Int) = value.contains(number)
 
     companion object {
         private const val DELIMITER = ','

@@ -15,7 +15,7 @@ class LottoController {
         OutputView.displayPurchasedLotto(lottos.getPurchasedLotto())
 
         val winningNumber = getWinningNumber()
-
+        val bonusNumber = getBonusNumber()
     }
 
     private fun getAmount(): Amount =
@@ -26,6 +26,13 @@ class LottoController {
         }
 
     private fun getWinningNumber(): WinningNumber =
+        executeWithRetry(
+            { OutputView.displayWinningNumberInputPrompt() },
+        ) {
+            WinningNumber.from(InputView.readInput())
+        }
+
+    private fun getBonusNumber(): WinningNumber =
         executeWithRetry(
             { OutputView.displayWinningNumberInputPrompt() },
         ) {

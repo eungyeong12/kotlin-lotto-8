@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class WinningNumberTest {
+
     @Test
     fun `정상적인 입력이 들어올 경우, WinningNumber 객체가 생성된다`() {
         // given
         val input = "1, 2, 3, 4, 5, 6"
 
         // when
-        val winningNumber = WinningNumber.from(input).numbers
+        val winningNumber = WinningNumber.from(input).value
 
         // then
         assertEquals(winningNumber.size, 6)
