@@ -6,4 +6,8 @@ object OutputView {
     fun displayAmountInputPrompt() {
         println(AMOUNT_INPUT_PROMPT)
     }
+
+    fun displayErrorMessage(errorMessage: String) {
+        println(errorMessage)
+    }
 }
