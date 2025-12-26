@@ -16,9 +16,5 @@ enum class ErrorMessage(val message: String) {
     WRONG_RANGE_BONUS_NUMBER("보너스 번호는 1에서 45 사이여야 합니다."),
     DUPLICATE_BONUS_NUMBER("보너스 번호는 당첨 번호와 중복되지 않아야 합니다.");
 
-    companion object {
-        private const val PREFIX = "[ERROR]"
-    }
-
-    override fun toString() = "$PREFIX $message"
+    val errorMessage: String get() = "[ERROR] $message"
 }

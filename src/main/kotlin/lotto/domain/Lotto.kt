@@ -5,7 +5,7 @@ import lotto.exception.ErrorMessage
 
 class Lotto(private val numbers: List<Int>) {
     init {
-        require(numbers.size == 6) { ErrorMessage.LOTTO_COUNT_NOT_SIX }
+        require(numbers.size == 6) { ErrorMessage.LOTTO_COUNT_NOT_SIX.errorMessage }
     }
 
     fun matchCount(other: List<Int>): Int {

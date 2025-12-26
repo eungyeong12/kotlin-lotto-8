@@ -30,7 +30,7 @@ class BonusNumberTest {
         val exception = assertThrows<IllegalArgumentException> { BonusNumber.from(input, winningNumber) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.BLANK_BONUS_NUMBER.toString())
+        assertEquals(exception.message, ErrorMessage.BLANK_BONUS_NUMBER.errorMessage)
     }
 
     @Test
@@ -43,7 +43,7 @@ class BonusNumberTest {
         val exception = assertThrows<IllegalArgumentException> { BonusNumber.from(input, winningNumber) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.BONUS_NUMBER_NOT_INTEGER.toString())
+        assertEquals(exception.message, ErrorMessage.BONUS_NUMBER_NOT_INTEGER.errorMessage)
     }
 
     @Test
@@ -56,7 +56,7 @@ class BonusNumberTest {
         val exception = assertThrows<IllegalArgumentException> { BonusNumber.from(input, winningNumber) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.WRONG_RANGE_BONUS_NUMBER.toString())
+        assertEquals(exception.message, ErrorMessage.WRONG_RANGE_BONUS_NUMBER.errorMessage)
     }
 
     @Test
@@ -69,6 +69,6 @@ class BonusNumberTest {
         val exception = assertThrows<IllegalArgumentException> { BonusNumber.from(input, winningNumber) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.DUPLICATE_BONUS_NUMBER.toString())
+        assertEquals(exception.message, ErrorMessage.DUPLICATE_BONUS_NUMBER.errorMessage)
     }
 }

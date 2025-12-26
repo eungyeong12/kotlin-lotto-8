@@ -1,10 +1,8 @@
 package lotto.validator
 
-import lotto.exception.ErrorMessage
-
 object Validator {
 
-    fun validateNotBlank(input: String, errorMessage: ErrorMessage) {
+    fun validateNotBlank(input: String, errorMessage: String) {
         require(input.isNotBlank()) { errorMessage }
     }
 }

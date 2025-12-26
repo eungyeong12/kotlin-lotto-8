@@ -28,7 +28,7 @@ class AmountTest {
         val exception = assertThrows<IllegalArgumentException> { Amount.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.BLANK_AMOUNT_INPUT.toString())
+        assertEquals(exception.message, ErrorMessage.BLANK_AMOUNT_INPUT.errorMessage)
     }
 
     @Test
@@ -40,7 +40,7 @@ class AmountTest {
         val exception = assertThrows<IllegalArgumentException> { Amount.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.AMOUNT_NOT_INTEGER.toString())
+        assertEquals(exception.message, ErrorMessage.AMOUNT_NOT_INTEGER.errorMessage)
     }
 
     @Test
@@ -52,7 +52,7 @@ class AmountTest {
         val exception = assertThrows<IllegalArgumentException> { Amount.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.AMOUNT_LESS_THAN_THOUSAND.toString())
+        assertEquals(exception.message, ErrorMessage.AMOUNT_LESS_THAN_THOUSAND.errorMessage)
     }
 
     @Test
@@ -64,6 +64,6 @@ class AmountTest {
         val exception = assertThrows<IllegalArgumentException> { Amount.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.AMOUNT_NOT_THOUSAND_UNIT.toString())
+        assertEquals(exception.message, ErrorMessage.AMOUNT_NOT_THOUSAND_UNIT.errorMessage)
     }
 }

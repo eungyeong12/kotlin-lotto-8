@@ -17,8 +17,8 @@ value class WinningNumber private constructor(
         require(value.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) {
             ErrorMessage.WRONG_RANGE_WINNING_NUMBER
         }
-        require(value.size == LOTTO_COUNT) { ErrorMessage.WINNING_NUMBER_NOT_SIX }
-        require(value.size == value.distinct().size) { ErrorMessage.DUPLICATE_WINNING_NUMBER }
+        require(value.size == LOTTO_COUNT) { ErrorMessage.WINNING_NUMBER_NOT_SIX.errorMessage }
+        require(value.size == value.distinct().size) { ErrorMessage.DUPLICATE_WINNING_NUMBER.errorMessage }
     }
 
     fun contains(number: Int) = value.contains(number)
@@ -27,10 +27,10 @@ value class WinningNumber private constructor(
         private const val DELIMITER = ','
 
         fun from(input: String): WinningNumber {
-            validateNotBlank(input, ErrorMessage.BLANK_WINNING_NUMBER_INPUT)
+            validateNotBlank(input, ErrorMessage.BLANK_WINNING_NUMBER_INPUT.errorMessage)
             val tokens = splitByDelimiter(input, DELIMITER)
             return WinningNumber(tokens.map {
-                parseToNumber(it, ErrorMessage.WINNING_NUMBER_NOT_INTEGER)
+                parseToNumber(it, ErrorMessage.WINNING_NUMBER_NOT_INTEGER.errorMessage)
             })
         }
     }

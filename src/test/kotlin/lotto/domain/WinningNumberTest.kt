@@ -29,7 +29,7 @@ class WinningNumberTest {
         val exception = assertThrows<IllegalArgumentException> { WinningNumber.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.BLANK_WINNING_NUMBER_INPUT.toString())
+        assertEquals(exception.message, ErrorMessage.BLANK_WINNING_NUMBER_INPUT.errorMessage)
     }
 
     @Test
@@ -41,7 +41,7 @@ class WinningNumberTest {
         val exception = assertThrows<IllegalArgumentException> { WinningNumber.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.WINNING_NUMBER_NOT_INTEGER.toString())
+        assertEquals(exception.message, ErrorMessage.WINNING_NUMBER_NOT_INTEGER.errorMessage)
     }
 
     @Test
@@ -53,7 +53,7 @@ class WinningNumberTest {
         val exception = assertThrows<IllegalArgumentException> { WinningNumber.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.WRONG_RANGE_WINNING_NUMBER.toString())
+        assertEquals(exception.message, ErrorMessage.WRONG_RANGE_WINNING_NUMBER.errorMessage)
     }
 
     @Test
@@ -65,7 +65,7 @@ class WinningNumberTest {
         val exception = assertThrows<IllegalArgumentException> { WinningNumber.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.WINNING_NUMBER_NOT_SIX.toString())
+        assertEquals(exception.message, ErrorMessage.WINNING_NUMBER_NOT_SIX.errorMessage)
     }
 
     @Test
@@ -77,6 +77,6 @@ class WinningNumberTest {
         val exception = assertThrows<IllegalArgumentException> { WinningNumber.from(input) }
 
         // then
-        assertEquals(exception.message, ErrorMessage.DUPLICATE_WINNING_NUMBER.toString())
+        assertEquals(exception.message, ErrorMessage.DUPLICATE_WINNING_NUMBER.errorMessage)
     }
 }

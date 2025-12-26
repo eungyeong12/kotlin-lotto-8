@@ -1,10 +1,8 @@
 package lotto.parser
 
-import lotto.exception.ErrorMessage
-
 object Parser {
 
-    fun parseToNumber(input: String, errorMessage: ErrorMessage): Int {
+    fun parseToNumber(input: String, errorMessage: String): Int {
         val number = input.toIntOrNull()
         requireNotNull(number) { errorMessage }
         return number
