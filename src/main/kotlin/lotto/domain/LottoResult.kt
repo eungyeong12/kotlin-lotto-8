@@ -1,13 +1,16 @@
 package lotto.domain
 
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 class LottoResult(
     val result: Map<Rank, Int>
 ){
     fun calculateProfit(amount: Amount): Double {
         val total = calculateTotalPrize()
-        return total.divide(amount.value.toBigDecimal()).toDouble()
+        return total.multiply(100.toBigDecimal())
+            .divide(amount.value.toBigDecimal(), 1, RoundingMode.HALF_UP)
+            .toDouble()
     }
 
     private fun calculateTotalPrize(): BigDecimal {

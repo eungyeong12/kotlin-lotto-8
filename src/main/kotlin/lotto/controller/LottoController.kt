@@ -20,6 +20,7 @@ class LottoController {
         val bonusNumber = getBonusNumber(winningNumber)
 
         val result = LottoResult(lottoMachine.getRanks(winningNumber, bonusNumber))
+        OutputView.displayResult(result.result, result.calculateProfit(amount))
     }
 
     private fun getAmount(): Amount =
