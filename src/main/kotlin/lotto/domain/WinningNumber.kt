@@ -1,6 +1,5 @@
 package lotto.domain
 
-import com.sun.jdi.Value
 import lotto.constant.Constants.LOTTO_COUNT
 import lotto.constant.Constants.LOTTO_MAX_NUMBER
 import lotto.constant.Constants.LOTTO_MIN_NUMBER
