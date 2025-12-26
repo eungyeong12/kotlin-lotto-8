@@ -3,6 +3,7 @@ package lotto.controller
 import lotto.domain.Amount
 import lotto.domain.BonusNumber
 import lotto.domain.LottoMachine
+import lotto.domain.LottoResult
 import lotto.domain.RandomNumbersProvider
 import lotto.domain.WinningNumber
 import lotto.view.InputView
@@ -12,11 +13,13 @@ class LottoController {
 
     fun run() {
         val amount = getAmount()
-        val lottoes = LottoMachine.generateLotto(amount, RandomNumbersProvider())
-        OutputView.displayPurchasedLotto(lottoes.toDto())
+        val lottoMachine = LottoMachine.generateLotto(amount, RandomNumbersProvider())
+        OutputView.displayPurchasedLotto(lottoMachine.getPurchasedLotto())
 
         val winningNumber = getWinningNumber()
         val bonusNumber = getBonusNumber(winningNumber)
+
+        val result = LottoResult(lottoMachine.getRanks(winningNumber, bonusNumber))
     }
 
     private fun getAmount(): Amount =

@@ -4,9 +4,18 @@ import lotto.constant.Constants.AMOUNT_UNIT
 import lotto.domain.dto.PurchasedLotto
 
 class LottoMachine private constructor(
-    val lottoes: List<Lotto>
+    private val lottoes: List<Lotto>
 ){
-    fun toDto() = PurchasedLotto(
+    fun getRanks(winningNumber: WinningNumber, bonusNumber: BonusNumber): Map<Rank, Int> {
+        return lottoes.map {
+            Rank.from(
+                it.matchCount(winningNumber.value),
+                it.contains(bonusNumber.value)
+            )
+        }.groupingBy { it }.eachCount()
+    }
+
+    fun getPurchasedLotto() = PurchasedLotto(
         lottoes.size,
         lottoes.map { it.toDto() }
     )
