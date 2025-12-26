@@ -1,7 +1,8 @@
 package lotto.controller
 
 import lotto.domain.Amount
-import lotto.domain.Lottos
+import lotto.domain.BonusNumber
+import lotto.domain.LottoMachine
 import lotto.domain.RandomNumbersProvider
 import lotto.domain.WinningNumber
 import lotto.view.InputView
@@ -11,11 +12,11 @@ class LottoController {
 
     fun run() {
         val amount = getAmount()
-        val lottos = Lottos.from(amount, RandomNumbersProvider())
-        OutputView.displayPurchasedLotto(lottos.getPurchasedLotto())
+        val lottoes = LottoMachine.generateLotto(amount, RandomNumbersProvider())
+        OutputView.displayPurchasedLotto(lottoes.toDto())
 
         val winningNumber = getWinningNumber()
-        val bonusNumber = getBonusNumber()
+        val bonusNumber = getBonusNumber(winningNumber)
     }
 
     private fun getAmount(): Amount =
@@ -32,11 +33,11 @@ class LottoController {
             WinningNumber.from(InputView.readInput())
         }
 
-    private fun getBonusNumber(): WinningNumber =
+    private fun getBonusNumber(winningNumber: WinningNumber): BonusNumber =
         executeWithRetry(
-            { OutputView.displayWinningNumberInputPrompt() },
+            { OutputView.displayBonusNumberInputPrompt() },
         ) {
-            WinningNumber.from(InputView.readInput())
+            BonusNumber.from(InputView.readInput(), winningNumber)
         }
 
     private fun <T> executeWithRetry(prompt: () -> Unit, block: () -> T): T {
