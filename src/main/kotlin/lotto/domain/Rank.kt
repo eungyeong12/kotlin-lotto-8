@@ -11,7 +11,7 @@ enum class Rank(
     FIFTH(3, 5_000),
     NONE(0, 0);
 
-    fun calculatePrize(count: Int) = prize * count
+    fun calculatePrize(count: Int) = prize.toBigDecimal() * count.toBigDecimal()
 
     companion object {
         fun from(matchCount: Int, bonusMatch: Boolean) =
