@@ -1,7 +1,6 @@
 package lotto.domain
 
 import lotto.constant.Constants.AMOUNT_UNIT
-import lotto.domain.dto.PurchasedLotto
 
 class LottoMachine private constructor(
     private val lottoes: List<Lotto>
@@ -15,10 +14,7 @@ class LottoMachine private constructor(
         }.groupingBy { it }.eachCount()
     }
 
-    fun getPurchasedLotto() = PurchasedLotto(
-        lottoes.size,
-        lottoes.map { it.toDto() }
-    )
+    fun toDto() = lottoes.map { it.toDto() }
 
     companion object {
         fun generateLotto(amount: Amount, numbersProvider: NumbersProvider): LottoMachine {

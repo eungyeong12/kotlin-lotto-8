@@ -13,13 +13,13 @@ class LottoController {
 
     fun run() {
         val amount = getAmount()
-        val lottoMachine = LottoMachine.generateLotto(amount, RandomNumbersProvider())
-        OutputView.displayPurchasedLotto(lottoMachine.getPurchasedLotto())
+        val lottoes = LottoMachine.generateLotto(amount, RandomNumbersProvider())
+        OutputView.displayPurchasedLotto(lottoes.toDto())
 
         val winningNumber = getWinningNumber()
         val bonusNumber = getBonusNumber(winningNumber)
 
-        val result = LottoResult(lottoMachine.getRanks(winningNumber, bonusNumber))
+        val result = LottoResult(lottoes.getRanks(winningNumber, bonusNumber))
         OutputView.displayResult(result.result, result.calculateProfit(amount))
     }
 

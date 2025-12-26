@@ -2,7 +2,6 @@ package lotto.view
 
 import lotto.domain.Rank
 import lotto.domain.dto.LottoDto
-import lotto.domain.dto.PurchasedLotto
 
 object OutputView {
     private const val AMOUNT_INPUT_PROMPT = "구입금액을 입력해 주세요."
@@ -36,10 +35,10 @@ object OutputView {
         println(errorMessage)
     }
 
-    fun displayPurchasedLotto(lottos: PurchasedLotto) {
+    fun displayPurchasedLotto(lottos: List<LottoDto>) {
         println()
-        println("${lottos.count}$PURCHASED_COUNT_PROMPT")
-        println(formatPurchasedLottoNumbers(lottos.lottos))
+        println("${lottos.size}$PURCHASED_COUNT_PROMPT")
+        println(formatPurchasedLottoNumbers(lottos))
     }
 
     fun displayResult(result: Map<Rank, Int>, profit: Double) {

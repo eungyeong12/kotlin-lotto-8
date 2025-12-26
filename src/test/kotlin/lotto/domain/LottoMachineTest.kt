@@ -12,11 +12,11 @@ class LottoMachineTest {
         val numbersProvider = FixedNumbersProvider(listOf(1, 2, 3, 4, 5, 6))
 
         // when
-        val lottoMachine = LottoMachine.generateLotto(amount, numbersProvider)
-        val purchasedLotto = lottoMachine.getPurchasedLotto()
+        val lottoes = LottoMachine.generateLotto(amount, numbersProvider)
+        val purchasedLotto = lottoes.toDto()
 
         // then
-        assertEquals(purchasedLotto.count, 10)
+        assertEquals(purchasedLotto.size, 10)
     }
 
     @Test
@@ -24,12 +24,12 @@ class LottoMachineTest {
         // given
         val amount = Amount.from("10000")
         val numbersProvider = FixedNumbersProvider(listOf(1, 2, 3, 4, 5, 6))
-        val lottoMachine = LottoMachine.generateLotto(amount, numbersProvider)
+        val lottoes = LottoMachine.generateLotto(amount, numbersProvider)
         val winningNumber = WinningNumber.from("2, 3, 4, 5, 6, 7")
         val bonusNumber = BonusNumber.from("1", winningNumber)
 
         // when
-        val result = lottoMachine.getRanks(winningNumber, bonusNumber)
+        val result = lottoes.getRanks(winningNumber, bonusNumber)
 
         // then
         assertEquals(result[Rank.SECOND], 10)
