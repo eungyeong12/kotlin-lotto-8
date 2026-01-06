@@ -2,11 +2,13 @@ package lotto.controller
 
 import lotto.domain.Lotto
 import lotto.domain.RandomLottoNumberGenerator
+import lotto.domain.Rank
 import lotto.parser.Parser.parseToNumber
 import lotto.parser.Parser.splitByDelimiter
 import lotto.validator.Validator.validateNotBlank
 import lotto.view.InputView
 import lotto.view.OutputView
+import java.math.RoundingMode
 
 class LottoController {
 
@@ -18,6 +20,15 @@ class LottoController {
 
         val winningNumber = getWinningNumber()
         val bonusNumber = getBonusNumber(winningNumber)
+
+        val result = purchasedLotto.map { lotto ->
+            Rank.from(lotto.getMatchCount(winningNumber.getLotto()), lotto.contains(bonusNumber))
+        }.groupingBy { it }.eachCount()
+
+        val profit = result.map { (rank, count) -> rank.getPrize(count) }
+            .sumOf { it }
+            .multiply(100.toBigDecimal())
+            .divide(amount.toBigDecimal(), 1, RoundingMode.HALF_UP)
     }
 
     private fun getAmount(): Int =
@@ -43,7 +54,7 @@ class LottoController {
 
     private fun getBonusNumber(winningNumber: Lotto): Int =
         executeWithRetry(
-            { println("보너스 번호를 입력해 주세요.") },
+            { println("\n보너스 번호를 입력해 주세요.") },
         ) {
             val input = readNotBlankInput()
             val number = parseToNumber(input)
