@@ -11,7 +11,7 @@ class Lotto(private val numbers: List<Int>) {
         fun from(amount: Int, lottoNumberGenerator: LottoNumberGenerator): List<Lotto> {
             val count = amount / 1000
             return List(count) {
-                Lotto(lottoNumberGenerator.generate())
+                Lotto(lottoNumberGenerator.generate().sorted())
             }
         }
     }
