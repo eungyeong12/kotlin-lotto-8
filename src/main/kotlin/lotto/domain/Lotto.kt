@@ -13,6 +13,8 @@ class Lotto(private val numbers: List<Int>) {
 
     fun getLotto() = numbers
 
+    fun contains(number: Int) = numbers.contains(number)
+
     companion object {
         fun from(amount: Int, lottoNumberGenerator: LottoNumberGenerator): List<Lotto> {
             val count = amount / 1000

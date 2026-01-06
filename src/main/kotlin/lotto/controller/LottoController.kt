@@ -17,6 +17,7 @@ class LottoController {
         OutputView.printPurchasedLotto(purchasedLotto)
 
         val winningNumber = getWinningNumber()
+        val bonusNumber = getBonusNumber(winningNumber)
     }
 
     private fun getAmount(): Int =
@@ -38,6 +39,17 @@ class LottoController {
             val tokens = splitByDelimiter(input, ',')
             val numbers = tokens.map { parseToNumber(it) }
             Lotto(numbers)
+        }
+
+    private fun getBonusNumber(winningNumber: Lotto): Int =
+        executeWithRetry(
+            { println("보너스 번호를 입력해 주세요.") },
+        ) {
+            val input = readNotBlankInput()
+            val number = parseToNumber(input)
+            require(number in 1..45) { "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다." }
+            require(!winningNumber.contains(number)) { "[ERROR] 로또 번호는 당첨 번호와 중복되지 않아야 합니다." }
+            number
         }
 
     private fun <T> executeWithRetry(prompt: () -> Unit, block: () -> T): T {
