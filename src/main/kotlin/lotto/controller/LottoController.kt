@@ -1,5 +1,7 @@
 package lotto.controller
 
+import lotto.domain.Lotto
+import lotto.domain.RandomLottoNumberGenerator
 import lotto.parser.Parser.parseToNumber
 import lotto.validator.Validator.validateNotBlank
 import lotto.view.InputView
@@ -9,6 +11,9 @@ class LottoController {
 
     fun run() {
         val amount = getAmount()
+        val lottoNumberGenerator = RandomLottoNumberGenerator()
+        val purchasedLotto = Lotto.from(amount, lottoNumberGenerator)
+        OutputView.printPurchasedLotto(purchasedLotto)
     }
 
     private fun getAmount(): Int =

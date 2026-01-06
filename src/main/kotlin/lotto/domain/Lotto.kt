@@ -5,4 +5,14 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
     }
 
+    fun getLotto() = numbers
+
+    companion object {
+        fun from(amount: Int, lottoNumberGenerator: LottoNumberGenerator): List<Lotto> {
+            val count = amount / 1000
+            return List(count) {
+                Lotto(lottoNumberGenerator.generate())
+            }
+        }
+    }
 }
