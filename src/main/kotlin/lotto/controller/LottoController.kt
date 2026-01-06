@@ -1,0 +1,41 @@
+package lotto.controller
+
+import lotto.parser.Parser.parseToNumber
+import lotto.validator.Validator.validateNotBlank
+import lotto.view.InputView
+import lotto.view.OutputView
+
+class LottoController {
+
+    fun run() {
+        val amount = getAmount()
+    }
+
+    private fun getAmount(): Int =
+        executeWithRetry(
+            { println("구입금액을 입력해 주세요.") },
+        ) {
+            val input = readNotBlankInput()
+            val number = parseToNumber(input)
+            require(number >= 1000) { "[ERROR] 로또 금액은 1,000원 이상이어야 합니다." }
+            require(number % 1000 == 0) { "[ERROR] 로또 금액은 1,000원 단위여야 합니다." }
+            number
+        }
+
+    private fun <T> executeWithRetry(prompt: () -> Unit, block: () -> T): T {
+        while (true) {
+            try {
+                prompt()
+                return block()
+            } catch (e: IllegalArgumentException) {
+                OutputView.printErrorMessage(e.message.toString())
+            }
+        }
+    }
+
+    private fun readNotBlankInput(): String {
+        val input = InputView.readInput()
+        validateNotBlank(input)
+        return input
+    }
+}
