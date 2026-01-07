@@ -29,6 +29,8 @@ class LottoController {
             .sumOf { it }
             .multiply(100.toBigDecimal())
             .divide(amount.toBigDecimal(), 1, RoundingMode.HALF_UP)
+
+        OutputView.printResult(result, profit)
     }
 
     private fun getAmount(): Int =
